@@ -1,0 +1,25 @@
+{% extends "main/base.html" %} 
+
+{% block title %} 
+    Aufträge
+{% endblock title %} 
+
+{% block site_header %} 
+    Neuer Auftrag
+{% endblock site_header %}
+
+{% block content %}
+<!--Alert--> 
+        {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+        
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Equipment auswählen" />
+</form>
+      
+        
+  
+{% endblock content %}

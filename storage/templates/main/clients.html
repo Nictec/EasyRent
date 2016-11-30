@@ -1,0 +1,27 @@
+{% extends "main/base.html" %} 
+
+{% block title %} 
+    Kunden
+{% endblock %}
+
+{% block site_header %} 
+    Kunden
+{% endblock %} 
+
+{% block content %} 
+    <table> 
+      {% for client in object_list %}
+        <tr>
+            <th>{{ client.email }}
+                (<a href="{% url "storageupdate" pk=client.id %}">bearbeiten</a>) 
+                {% if client.id %}
+               (<a href="{% url "storagedelete" pk=client.id %}">löschen</a>)
+                {% endif %}
+            </th> 
+            
+            {% empty %}
+            <th>Keine Kunden</th>
+        </tr>
+    </table> 
+{% endfor %} 
+{% endblock %}

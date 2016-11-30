@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<h1>Equipment Löschen</h1>
+
+<h6>Wollen Sie  {{ equipment }} wirklich löschen?</h6>
+
+<form action="{% url "storagedelete" pk=equipment.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" class="btn btn-success" value="Ja Löschen." />
+  <a href="{% url "storage" %}"class="btn btn-danger" role="button">Nein, Abbrechen.</a>
+</form>
+
+{% endblock %}

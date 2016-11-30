@@ -1,0 +1,63 @@
+{% extends "main/base.html" %}  
+{% block title %}
+    Equipment
+{% endblock title %} 
+
+{% block site_header %} 
+    Equipment
+{% endblock site_header %}
+
+{% block content %} 
+
+ {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %} 
+ 
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+
+<form method="get"> 
+  <select name='filter' id='filter' onchange="this.form.submit()" > 
+    <option > -- Bitte Gewerk Auswählen -- </option>
+    <option value="L" >Licht</option>
+    <option value="T" >Ton</option>
+    <option value="R" >Rigging</option>
+  </select>
+</form>
+<a href="{% url "neweq" %}" class="btn btn-primary pull-right" role="button">Equipment einlagern</a> 
+<div id="list" style="padding-top:50px">
+<table class="table" style="border: 1px solid black"> 
+    {% for equipment in object_list %}
+        <tr>
+            <th>{{ equipment.name }} 
+                {% with equipment.id|stringformat:"s" as equipment_id %}
+                 <button onclick="openModal()">auswählen ajax</button> 
+                 <a href="{% url 'eqadd' %}?eq={{equipment_id}}">auswählen</a> </th> 
+                 {% endwith %} 
+                </tr> 
+         
+         {% endfor %} 
+    </table> 
+ 
+
+
+
+</div>  
+<!-- modal--> 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Bitte Anzahl auswählen</h2>
+    </div>
+    <div class="modal-body" id="modalContent">
+    </div>
+  </div>
+
+</div>
+  
+{% endblock content %}

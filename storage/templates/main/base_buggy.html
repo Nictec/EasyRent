@@ -1,0 +1,141 @@
+<!-- DOCTYPE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %} {% endblock title %}</title>
+  <meta charset="utf-8">
+  <!-- Viewport Meta Tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+  {% load staticfiles %}
+  <!-- Bootstrap CSS --> <!-- Note: The Django version is commented out to be able to test the ui without jinja --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    
+  <!--font awsome--> 
+  <script src="https://use.fontawesome.com/4220c00619.js"></script>
+  
+  <!-- custom css --> 
+  <link rel="stylesheet" href="{% static 'storage/css/dash.css' %}"> 
+  <link rel="stylesheet" href="{% static 'storage/css/dashboard.css' %}">
+ 
+</head>
+<body> 
+    <!-- top bar  --> 
+    
+    <nav class="navbar navbar-dark bg-inverse navbar-full">
+
+        <!-- Brand --> 
+        <a class="navbar-brand" href="#">{% block site_header %} {% endblock site_header %}</a>
+
+        <!-- Links -->
+        <ul class="nav navbar-nav"> 
+           <li> 
+           
+<!--
+            <li class="nav-item"> 
+            <div class="pull-right"> 
+                <a class="nav-link navbar-right" href="{% url 'logout' %}">logout</a> 
+            </div>  
+-->
+                
+            
+          
+        </ul> 
+        <ul class="nav pull-right"> 
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-user fa-lg"></i> Profil
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li> 
+      <li> 
+          <a href="#"><i class="fa fa-sliders" aria-hidden="true"></i> Einstellungen</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+</nav>
+    
+<div class="nav-side-menu">
+    <div class="brand">Brand Logo</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                </a>
+            </li>
+            <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                <a href="#"><i class="fa fa-signal" aria-hidden="true"></i> Equipment <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="products">
+                <li><a href="{% url 'storage' %}">Liste</a></li>
+                <li><a href="{% url 'neweq' %}">Neu Einlagern</a></li> 
+                <li><a href="#">zurückgeben</a></li>
+            </ul>
+            <li data-toggle="collapse" data-target="#service" class="collapsed">
+                <a href="#"><i class="fa fa-address-book" aria-hidden="true"></i> Kunden <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="service">
+                <li><a href="{% url 'clients' %}">Liste</a></li>
+                <li>E-mail client</li>
+            </ul>
+
+
+            <li data-toggle="collapse" data-target="#new" class="collapsed">
+                <a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Aufträge <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="new">
+                <li><a href="{% url 'Order' %}">alle Aufträge</a></li> 
+                <li>zu besprechende Aufträge</li>
+            </ul> 
+            <li>
+                <a href="#">
+                    <i class="fa fa-eur" aria-hidden="true"></i> Rechnungen
+                </a>
+            </li>
+                <li data-toggle="collapse" data-target="#settings" class="collapsed">
+                <a href="#"><i class="fa fa-sliders" aria-hidden="true"></i> Einstellungen <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="settings">
+                <li>Benutzer</li> 
+                <li>sonstiges</li>
+            </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" id="main">
+    <div class="row">
+        <div class="col-md-12">
+            {% block content %} 
+            {% endblock content %}
+        </div>
+    </div>
+</div>
+    
+        
+        
+    </div>
+
+
+
+    
+    
+    
+  <!-- JavaScript: placed at the end of the document so the pages load faster -->
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+
+  <!-- Tether -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+</body>
+</html>
