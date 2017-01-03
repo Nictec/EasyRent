@@ -1,5 +1,5 @@
 from django.contrib import admin 
-from .models import Equipment, client, Order, Assignment
+from .models import Equipment, client, Order, Assignment, shelf
 
 # Register your models here. 
 class AssignmentInline(admin.TabularInline): 
@@ -11,4 +11,5 @@ class EquipmentAdmin(admin.ModelAdmin):
     
 admin.site.register(Equipment, EquipmentAdmin) 
 admin.site.register(client) 
-admin.site.register(Order)
+admin.site.register(Order) 
+admin.site.register(shelf)

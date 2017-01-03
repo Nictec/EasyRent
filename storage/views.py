@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from django.shortcuts import render, redirect, HttpResponse
 import datetime 
-from .forms import neweqForm, neweventForm, FilterForm, quantityForm, login_form 
+from .forms import neweqForm, neweventForm, FilterForm, quantityForm, login_form, UserForm 
 from .models import Equipment, Order, client, Assignment
 from django.contrib import messages 
 from django.views.generic import ListView, DetailView 
@@ -13,12 +13,15 @@ from django.core.urlresolvers import reverse
 from django.db.models import Count 
 from django.contrib.auth import authenticate, login, logout
 import json 
+from django.core import serializers
 from django.contrib.auth.decorators import login_required 
 from django.template import RequestContext 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponseForbidden 
 from django.views.decorators.http import require_http_methods
-
+from ember import *
+from django.views.generic.base import View 
+from django.contrib.auth.models import User
 # Create your views here. 
 
 def index(request): 
@@ -47,7 +50,7 @@ def logout_view(request):
     logout(request) 
     return redirect('/')
     
-@login_required(login_url='/')    
+#@login_required(login_url='/')    
 def dashboard(request):  
     now = str(datetime.date.today().strftime("%A %d.%m.%Y")) 
     today = datetime.date.today() 
@@ -56,10 +59,19 @@ def dashboard(request):
     return render(request,'main/index.html', {'date':now, 'number':num, 'filter':today})
 
 
+class jlist(View): 
+    def serialize(self, obj):
+        return model_to_dict(obj,  
+        fields = ['id', 'name', 'fabricator', 'storeplace', 'labor']) 
+    def get(self, request): 
+        data = ["equipment", map(self.serialize, Equipment.objects.all())] 
+        return render_to_ember(data)
+
 class storage(LoginRequiredMixin, ListView): 
     login_url='/'
     model = Equipment 
     template_name= 'main/storage.html' 
+    
     
 class storageupdate(LoginRequiredMixin, UpdateView): 
     login_url='/'
@@ -197,14 +209,17 @@ def details(request, pk):
     payload={'order':order, 'equipment':equipment, 'pk':pk}
     return render(request, 'main/details.html', payload) 
 
-@login_required(login_url='/')
+#@login_required(login_url='/')
 def picklist(request, pk): 
     order = Order.objects.get(pk=pk)
     equipment_internal = Equipment.objects.filter(event__id=pk)  
     assignment = Assignment.objects.filter(Order=pk)
-    equipment = zip(equipment_internal, assignment,) 
+    equipment = zip(equipment_internal) 
     payload = {'equipment':equipment, 'order':order} 
-    return render(request, 'main/picklist.html', payload)
+    return render(request, 'main/picklist.html', payload) 
+#    data = serializers.serialize('json', self.get_queryset())
+#    return HttpResponse(data, mimetype="application/json")
+    
     
 @login_required(login_url='/')        
 def SetOrder(request): 
@@ -226,6 +241,24 @@ class ass_detail(LoginRequiredMixin, DetailView):
     model = Order
     template_name='main/ass_detail.html' 
     queryset = Order.objects.select_related() 
+    
+def admin(request): 
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+#            login(new_user)
+            # redirect, or however you want to get to the main view
+            return redirect("/config/")
+    else:
+      form = UserForm() 
+      users = User.objects.all()
+    return render(request, 'main/admin.html', {'form': form, 'users':users}) 
+
+    
+
+ 
+
     
     
     
@@ -250,7 +283,7 @@ class userlist(LoginRequiredMixin, ListView):
 #    return render(request, 'main/picklist.html', {'equipment': equipment_py}) 
 
 def debug(request): 
-    return HttpResponse(request.session['event_name'])
+    return render(request, 'main/spa.html')
         
 
     

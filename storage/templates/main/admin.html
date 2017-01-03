@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}  
+{% block title %} 
+    Admin 
+{% endblock title %} 
+{% block site-header %} 
+    Admin Panel 
+{% endblock site-header %} 
+{% block content %} 
+   <h3>Add new user</h3> 
+    <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create new user account" />
+</form> 
+    
+{% endblock content %}

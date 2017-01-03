@@ -7,12 +7,13 @@ from storage.choices import *
 class Equipment(models.Model): 
     name = models.CharField(max_length=30) 
     fabricator = models.CharField(max_length=30, default='-') 
-    storeplace = models.IntegerField() 
+    storeplace = models.ForeignKey("shelf", on_delete=models.CASCADE) 
     labor = models.CharField(max_length=1, choices=labor_choices) 
-    event = models.ManyToManyField('Order', blank = True, through= 'Assignment', through_fields=('Equipment', 'Order')) 
+    orders = models.ManyToManyField('Order', blank = True, through= 'Assignment', through_fields=('Equipment', 'Order')) 
     max_quantity = models.IntegerField(default=1, null = True) 
-    status = models.CharField(max_length=8, choices = STATUS_CHOICES, default = 'im Lager')
+    status = models.CharField(max_length=8, choices = STATUS_CHOICES, default = 'im Lager') 
     
+
    
    
    
@@ -56,10 +57,14 @@ class Order(models.Model):
         return self.name
     
 class Assignment(models.Model): 
-    Equipment = models.ForeignKey('Equipment',  on_delete=models.CASCADE) 
+    Equipment = models.ForeignKey('Equipment', related_name = "order",  on_delete=models.CASCADE) 
     Order = models.ForeignKey('Order',  on_delete=models.CASCADE) 
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=1) 
     
+class shelf(models.Model): 
+    name = models.CharField(max_length=100)
+    def __str__(self): 
+        return self.name
     
      
     

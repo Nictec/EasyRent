@@ -1,7 +1,8 @@
-from django.conf.urls import url, include
+from django.conf.urls import url, include 	
+from rest_framework.authtoken.views import obtain_auth_token
 from django.contrib import admin 
 from . import views 
-from storage.views import storage, storageupdate, storagedelete, Order_view, eqlist, ass_detail, userlist
+from storage.views import storage, storageupdate, storagedelete, Order_view, eqlist, ass_detail, userlist, jlist
 
 urlpatterns = [
     url(r'^$', views.index, name='index'), 
@@ -24,7 +25,9 @@ urlpatterns = [
     url(r'details/(?P<pk>\d+)', views.details, name="details"), 
     url(r'logout/', views.logout_view, name = "logout"),
     url(r'statusSet/', views.SetOrder, name="SetOrder"),
-    url(r'debug/', views.debug)
+    url(r'debugs/', jlist.as_view()), 
+    url(r'^config/', views.admin, name = "conf"),
+    url(r'^api-auth-token/', obtain_auth_token),
     
     
 ]

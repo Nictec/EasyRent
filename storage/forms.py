@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django import forms 
 from .models import Equipment, Order  
-from storage.choices import *
+from storage.choices import * 
+from django.contrib.auth.models import User
 
 
  
@@ -31,7 +32,8 @@ class neweventForm(forms.ModelForm):
     street = forms.CharField(label="Straße") 
     date = forms.DateField(label="Datum") 
     GuestNumber = forms.IntegerField(label="Gästeanzahl")
-    description = forms.CharField(label="Beschreibung", widget=forms.Textarea)
+    description = forms.CharField(label="Beschreibung", widget=forms.Textarea) 
+    
     
     class Meta: 
         model = Order 
@@ -49,6 +51,14 @@ class quantityForm(forms.Form):
 class login_form(forms.Form): 
     email = forms.CharField(label='email')
     password = forms.CharField(widget=forms.PasswordInput, label='password') 
+    
+class UserForm(forms.ModelForm): 
+    username = forms.CharField(label='username') 
+    email = forms.EmailField(label='email') 
+    password = password = forms.CharField(widget=forms.PasswordInput, label='password')
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
     
 
     

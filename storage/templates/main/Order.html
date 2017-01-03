@@ -8,8 +8,8 @@
     Dashboard
 {% endblock site_header %}
 
-{% block content %} 
-   <button class="button-green pull-right">neue Veranstaltung</button> 
+{% block content %}  
+<a href="{% url 'newevent' %}" class="b_green pull-right">Equipment einlagern</a> 
 <table class=table style="border: 1px solid black"> 
        <tr> 
            <th>Name</th> 
@@ -21,7 +21,7 @@
             (<a href="{% url 'details' pk=Assignment.id %}">Details</a>) 
             (<a href="{% url 'picklist' pk=Assignment.id %}">Lagerliste</a>)    
             </th> 
-            <th>{{ Assignment.status }}</th> 
+            <th>{{ Assignment.status|safe }}</th> 
             
             {% empty %}
             <th>Keine Veranstaltungen</th>
