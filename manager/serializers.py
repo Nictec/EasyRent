@@ -1,6 +1,6 @@
 from rest_framework import serializers  
 from django.contrib.auth.models import User, Group
-from storage.models import * 
+from .models import * 
 
         
 class AssignmentSerializer(serializers.HyperlinkedModelSerializer): 

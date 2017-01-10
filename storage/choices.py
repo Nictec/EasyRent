@@ -19,6 +19,6 @@ STATUS_CHOICES = (
     
      
 order_choices = ( 
-('glyphicon glyphicon-ok', 'bereit'),
-('glyphicon glyphicon-remove', 'nicht bereit'),
+('ok', 'bereit'),
+('notOK', 'nicht bereit'),
 )
