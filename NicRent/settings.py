@@ -127,5 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/' 
+MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media' 
+MEDIA_URL = '/api/media/'
 APPEND_SLASH = True
 

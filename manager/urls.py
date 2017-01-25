@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
-from rest_framework import routers  
+from rest_framework import routers 
+from django.conf import settings 
+from django.conf.urls.static import static
 from . import views 
 from .views import *
 
@@ -19,3 +21,6 @@ urlpatterns = [
     url(r'^shelfs/all', ShelfList.as_view(), name='shelfs'), 
     url(r'^shelfs/(?P<pk>[^/.]+)', ShelfDeatil.as_view(), name="shelfmod"),
 ]
+
+#Media files
+urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
