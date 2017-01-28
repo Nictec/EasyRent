@@ -8,7 +8,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=30) 
     fabricator = models.CharField(max_length=30, default='-') 
     beschreibung = models.CharField(max_length=200) 
-    Image = models.ImageField(upload_to='media', null=True)
+    Image = models.ImageField(upload_to='product_pics', null=True)
     storeplace = models.ForeignKey("shelf", on_delete=models.CASCADE) 
     labor = models.CharField(max_length=1, choices=labor_choices) 
     orders = models.ManyToManyField('Order', blank = True, through= 'Assignment', through_fields=('Equipment', 'Order')) 

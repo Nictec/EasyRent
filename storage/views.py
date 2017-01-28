@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic import UpdateView 
 from django.views.generic import DeleteView  
 from django.views.generic.edit import FormMixin 
-from custom_responses import AjaxTemplateMixin
+#from custom_responses import AjaxTemplateMixin
 from django.core.urlresolvers import reverse 
 from django.db.models import Count 
 from django.contrib.auth import authenticate, login, logout
@@ -19,7 +19,7 @@ from django.template import RequestContext
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponseForbidden 
 from django.views.decorators.http import require_http_methods
-from ember import *
+#from ember import *
 from django.views.generic.base import View 
 from django.contrib.auth.models import User
 # Create your views here. 
@@ -59,13 +59,13 @@ def dashboard(request):
     return render(request,'main/index.html', {'date':now, 'number':num, 'filter':today})
 
 
-class jlist(View): 
-    def serialize(self, obj):
-        return model_to_dict(obj,  
-        fields = ['id', 'name', 'fabricator', 'storeplace', 'labor']) 
-    def get(self, request): 
-        data = ["equipment", map(self.serialize, Equipment.objects.all())] 
-        return render_to_ember(data)
+#class jlist(View): 
+#    def serialize(self, obj):
+#        return model_to_dict(obj,  
+#        fields = ['id', 'name', 'fabricator', 'storeplace', 'labor']) 
+#    def get(self, request): 
+#        data = ["equipment", map(self.serialize, Equipment.objects.all())] 
+#        return render_to_ember(data)
 
 class storage(LoginRequiredMixin, ListView): 
     login_url='/'
@@ -83,7 +83,7 @@ class storageupdate(LoginRequiredMixin, UpdateView):
     
 
     
-class storagedelete(LoginRequiredMixin, AjaxTemplateMixin, DeleteView): 
+class storagedelete(LoginRequiredMixin, DeleteView): 
       login_url='/'
       model = Equipment
       template_name = 'main/storagedelete.html' 
