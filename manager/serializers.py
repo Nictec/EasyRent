@@ -13,7 +13,8 @@ class AssignmentSerializer(serializers.HyperlinkedModelSerializer):
         
         
 class EquipmentSerializer(serializers.ModelSerializer): 
-    order = AssignmentSerializer( many = True)
+    order = AssignmentSerializer( many = True) 
+    Image = serializers.ImageField(allow_empty_file=True)
     class Meta: 
         model = Equipment 
         fields = '__all__' 
