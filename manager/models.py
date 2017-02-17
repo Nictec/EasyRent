@@ -47,10 +47,11 @@ class Order(models.Model):
         choices=TYPE_CHOICES,
         default='Rental', 
         )
-    city = models.CharField(max_length=30) 
-    street= models.CharField(max_length=30)
-    date = models.DateField() 
-    GuestNumber = models.IntegerField() 
+    city = models.CharField(max_length=30, null=True, blank=True) 
+    street= models.CharField(max_length=30, null=True, blank=True)
+    dateStart = models.DateField(null=True) 
+    dateEnd = models.DateField(null=True) 
+    GuestNumber = models.IntegerField(null=True) 
     description = models.TextField() 
     client = models.ForeignKey("client", on_delete=models.CASCADE, blank = True, null = True) 
     status = models.CharField(max_length=30, choices=order_choices, default='notOK') 
