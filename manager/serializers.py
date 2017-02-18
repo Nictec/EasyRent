@@ -4,16 +4,18 @@ from .models import *
 
         
 class AssignmentSerializer(serializers.HyperlinkedModelSerializer): 
-    id = serializers.ReadOnlyField(source = 'Order.id') 
-    name = serializers.ReadOnlyField(source = 'Order.name') 
+    order = serializers.ReadOnlyField(source = 'Order.id') 
+    equipment = serializers.ReadOnlyField(source = 'Equipment.id') 
     
     class Meta:
         model = Assignment 
-        fields = ('id', 'name', 'quantity') 
+        fields = ('order', 'equipment', 'quantity') 
         
         
 class EquipmentSerializer(serializers.ModelSerializer): 
-    order = AssignmentSerializer( many = True) 
+    assignments = serializers.SerializerMethodField()
+    #SerializerMethodField looks for a method get_{name of the field}
+    #assignment_orders = serializers.SerializerMethodField()
     Image = serializers.ImageField(allow_empty_file=True)
     class Meta: 
         model = Equipment 
@@ -34,6 +36,16 @@ class EquipmentSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
         instance.save()
         return instance
+
+    #this is the method used by SerializerMethodField
+    def get_assignments(self, obj):
+        assignments = Assignment.objects.filter(Equipment=obj.id)
+        #orders = Order.objects.filter(Equipment=obj.id)
+        s = AssignmentSerializer(assignments, many=True)
+        return s.data
+    #def get_assigned_orders(self, obj):
+        #it should be possible to query all the assigned orders here and display them
+        #similar to getting the assignments above
     
 #    def to_representation(self, instance):
 #        representation = super(EquipmentSerializer, self).to_representation(instance)
@@ -60,6 +72,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name') 
 
 class OrderSerializer(serializers.ModelSerializer):
+    assignments = AssignmentSerializer(many=True, read_only=True)
     class Meta: 
         model = Order 
         fields = '__all__' 
