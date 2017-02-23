@@ -29,21 +29,21 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [ 
-    'manager', 
+INSTALLED_APPS = [
+    'manager',
     'storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 
-    'rest_framework', 
-    'client', 
-    'corsheaders', 
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'client',
+    'corsheaders',
     'djradicale',
-    
-] 
+
+]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-#djradicale 
+#djradicale
 
 DJRADICALE_CONFIG = {
     'server': {
@@ -168,8 +168,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/' 
-MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media' 
+STATIC_URL = '/static/'
+MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media'
 MEDIA_URL = '/api/media/'
-APPEND_SLASH = True
+APPEND_SLASH = False
 
