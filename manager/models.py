@@ -16,19 +16,6 @@ class Equipment(models.Model):
         return self.name
 
 
-class Client(models.Model):
-    firstname = models.CharField(max_length=30)
-    secondname = models.CharField(max_length=30)
-    email = models.EmailField()
-    post_code = models.IntegerField()
-    city = models.CharField(max_length=30)
-    street= models.CharField(max_length=30)
-
-    def __str__(self):
-        return "%s %s" % (self.firstname, self.secondname)
-
-
-
 class Order(models.Model):
     name = models.CharField(max_length=30)
     Type = models.CharField(
@@ -50,8 +37,8 @@ class Order(models.Model):
         return self.name
 
 class Assignment(models.Model):
-    order = models.ForeignKey('Order', related_name = "assignment",  on_delete=models.CASCADE)
-    equipment = models.ForeignKey('Equipment', on_delete=models.CASCADE)
+    order = models.ForeignKey('Order', related_name = "assignment")
+    equipment = models.ForeignKey('Equipment')
     quantity = models.PositiveIntegerField(default=1)
 
 class Shelf(models.Model):
@@ -59,7 +46,14 @@ class Shelf(models.Model):
     def __str__(self):
         return self.name
 
+class Client(models.Model):
+    firstname = models.CharField(max_length=30)
+    secondname = models.CharField(max_length=30)
+    email = models.EmailField()
+    post_code = models.IntegerField()
+    city = models.CharField(max_length=30)
+    street= models.CharField(max_length=30)
 
-
-
+    def __str__(self):
+        return "%s %s" % (self.firstname, self.secondname)
 
