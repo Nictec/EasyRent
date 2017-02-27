@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from storage.choices import *
+from .choices import *
 
 # Create your models here.
 class Equipment(models.Model):

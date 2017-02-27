@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'manager',
-    'storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'client',
     'corsheaders',
     'djradicale',
 
@@ -171,5 +169,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media'
 MEDIA_URL = '/api/media/'
-APPEND_SLASH = False
+APPEND_SLASH = False 
+
+#internal 
+REDIRECT = 'http://localhost:8000/api/'
 

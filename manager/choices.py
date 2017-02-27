@@ -18,3 +18,7 @@ STATUS_CHOICES = (
 ) 
     
      
+order_choices = ( 
+('ok', 'bereit'),
+('notOK', 'nicht bereit'),
+)
