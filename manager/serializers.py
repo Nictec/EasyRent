@@ -24,7 +24,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class ShelfSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Shelf
-		fields = ('id', 'name')
+		fields = ('__all__')
 
 class ClientSerializer(serializers.ModelSerializer):
 	class Meta:

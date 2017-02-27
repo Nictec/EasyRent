@@ -9,9 +9,13 @@ class Equipment(models.Model):
     fabricator = models.CharField(max_length=30, default='-')
     beschreibung = models.CharField(max_length=1000, blank=True)
     labor = models.CharField(max_length=1, choices=labor_choices)
-    max_quantity = models.IntegerField(default=1, null = True)
+    max_quantity = models.IntegerField(default=1, null = True) 
+    avail_quantity = models.IntegerField (default=1, null = True)
     status = models.CharField(max_length=8, choices = STATUS_CHOICES, default = 'im Lager')
-    storeplace = models.ForeignKey("shelf", on_delete=models.CASCADE)
+    storeplace = models.ForeignKey("shelf", on_delete=models.CASCADE) 
+    rent_price = models.IntegerField(null=True) 
+    purchasing_price = models.IntegerField(null=True) 
+    features = models.TextField(null=True)
     def __str__(self):
         return self.name
 
@@ -42,7 +46,9 @@ class Assignment(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
 class Shelf(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100) 
+    row = models.IntegerField(null=True) 
+    sNr = models.IntegerField(null=True) 
     def __str__(self):
         return self.name
 
