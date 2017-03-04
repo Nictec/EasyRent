@@ -171,6 +171,5 @@ MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media'
 MEDIA_URL = '/api/media/'
 APPEND_SLASH = False 
 
-#internal 
-REDIRECT = 'http://localhost:8000/api/'
+#internal
 
