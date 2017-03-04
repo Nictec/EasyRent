@@ -11,7 +11,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
 	def get_avail_quantity(self, obj):
 		assigned_sum = 0
-		assignments = Assignment.objects.filter(equipment=obj.id)#, active=True)
+		assignments = Assignment.objects.filter(equipment=obj.id, active=True)
 		for assignment in assignments:
 			assigned_sum += assignment.quantity
 		return obj.max_quantity - assigned_sum

@@ -44,6 +44,7 @@ class Assignment(models.Model):
 	order = models.ForeignKey('Order', related_name = "assignment")
 	equipment = models.ForeignKey('Equipment')
 	quantity = models.PositiveIntegerField(default=1)
+	active = models.BooleanField(default=True)
 
 class Shelf(models.Model):
 	name = models.CharField(max_length=100)
