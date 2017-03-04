@@ -8,8 +8,8 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls), 
-    url(r'^$', RedirectView.as_view(url=settings.REDIRECT, permanent=False)),
-    url(r'^api/', include('manager.urls'), name="manager"),
+#    url(r'^$', RedirectView.as_view(url=settings.REDIRECT, permanent=False)),
+    url(r'^', include('manager.urls'), name="manager"),
     url(r'^' + settings.DJRADICALE_CONFIG['server']['base_prefix'].lstrip('/'),
         include('djradicale.urls', namespace='djradicale')), 
      url(r'^\.well-known/(?P<type>(caldav|carddav))$',
