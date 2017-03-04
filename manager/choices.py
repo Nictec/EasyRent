@@ -1,24 +1,25 @@
-labor_choices = (  
-    ('L', 'Licht'), 
-    ('T', 'Ton'), 
+labor_choices = (
+    ('L', 'Licht'),
+    ('T', 'Ton'),
     ('R', 'rigging'),
-    )  
+    )
 
 
 
-TYPE_CHOICES = ( 
-    ('R', 'Rental'), 
+TYPE_CHOICES = (
+    ('R', 'Rental'),
     ('FS', 'Full Service'),
-) 
+)
 
 
-STATUS_CHOICES = ( 
-    ('OK', 'Geladen'), 
+STATUS_CHOICES = (
+    ('OK', 'Geladen'),
     ('im Lager', 'Im Lager'),
-) 
-    
-     
-order_choices = ( 
-('ok', 'bereit'),
-('notOK', 'nicht bereit'),
+	('Abgeschlossen', 'Abgeschlossen')
+)
+
+
+order_choices = (
+	('ok', 'bereit'),
+	('notOK', 'nicht bereit'),
 )

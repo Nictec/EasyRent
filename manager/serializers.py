@@ -4,9 +4,17 @@ from .models import *
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
+	avail_quantity = serializers.SerializerMethodField()
 	class Meta:
 		model = Equipment
 		fields = '__all__'
+
+	def get_avail_quantity(self, obj):
+		assigned_sum = 0
+		assignments = Assignment.objects.filter(equipment=obj.id)#, active=True)
+		for assignment in assignments:
+			assigned_sum += assignment.quantity
+		return obj.max_quantity - assigned_sum
 
 class AssignmentSerializer(serializers.ModelSerializer):
 	equipment_data = EquipmentSerializer(read_only=True, source="equipment")
