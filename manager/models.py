@@ -15,7 +15,7 @@ class Equipment(models.Model):
 	storeplace = models.ForeignKey("shelf", on_delete=models.CASCADE)
 	rent_price = models.IntegerField(null=True)
 	purchasing_price = models.IntegerField(null=True)
-	features = models.TextField(null=True, default="")
+	features = models.TextField(blank=True, default="")
 	def __str__(self):
 		return self.name
 
