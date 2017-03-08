@@ -18,6 +18,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
 class AssignmentSerializer(serializers.ModelSerializer):
 	equipment_data = EquipmentSerializer(read_only=True, source="equipment")
+	active = serializers.BooleanField(default=True)
 	class Meta:
 		model = Assignment
 		fields = '__all__'

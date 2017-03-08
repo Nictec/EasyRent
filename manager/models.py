@@ -34,6 +34,7 @@ class Order(models.Model):
 	GuestNumber = models.IntegerField(null=True)
 	description = models.TextField()
 	status = models.CharField(max_length=30, choices=order_choices, default='notOK')
+	# active = models.BooleanField(default=True)
 	client = models.ForeignKey("client", on_delete=models.CASCADE, blank = True, null = True)
 	assignments = models.ManyToManyField('Equipment', blank = True, through= 'Assignment', through_fields=('order', 'equipment'))
 

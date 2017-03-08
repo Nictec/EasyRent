@@ -16,6 +16,7 @@ router.register(r'shelf', views.ShelfViewSet)
 
 urlpatterns = router.urls
 urlpatterns.append(url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')))
+urlpatterns.append(url(r'^current-user/$', views.current_user))
 
 #Media files
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
