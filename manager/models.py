@@ -34,7 +34,6 @@ class Order(models.Model):
 	GuestNumber = models.IntegerField(null=True)
 	description = models.TextField()
 	status = models.CharField(max_length=30, choices=order_choices, default='notOK')
-	# active = models.BooleanField(default=True)
 	client = models.ForeignKey("client", on_delete=models.CASCADE, blank = True, null = True)
 	assignments = models.ManyToManyField('Equipment', blank = True, through= 'Assignment', through_fields=('order', 'equipment'))
 
@@ -45,7 +44,7 @@ class Assignment(models.Model):
 	order = models.ForeignKey('Order', related_name = "assignment")
 	equipment = models.ForeignKey('Equipment')
 	quantity = models.PositiveIntegerField(default=1)
-	active = models.BooleanField(default=True)
+
 
 class Shelf(models.Model):
 	name = models.CharField(max_length=100)
@@ -64,4 +63,3 @@ class Client(models.Model):
 
 	def __str__(self):
 		return "%s %s" % (self.firstname, self.secondname)
-
