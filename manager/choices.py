@@ -20,6 +20,7 @@ STATUS_CHOICES = (
 
 
 order_choices = (
+    ('Res', 'reserviert'),
 	('R', 'bereit'),
 	('IP', 'in bearbeitung'),
     ('F', 'abgeschlossen')

@@ -14,7 +14,7 @@ from django.forms.models import model_to_dict
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.filter(~Q(status='Res'))
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
@@ -48,19 +48,27 @@ def current_user(request):
     return Response({
         'id': user.id,
     })
-
+@api_view(['GET'])
+def cal(request):
+    start = request.GET.get('start')
+    end = request.GET.get('end')
+    queryset = Order.objects.filter(dateStart=start, dateEnd=end)
+    serializer = CalendarSerializer(queryset, many=True)
+    return Response(serializer.data)
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
 class ShelfViewSet(viewsets.ModelViewSet):
     queryset = Shelf.objects.all()
     serializer_class = ShelfSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
-
-
-
-
-
-
-
+class ReservationViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.filter(status='Res')
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)

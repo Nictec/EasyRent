@@ -39,6 +39,14 @@ class OrderSerializer(serializers.ModelSerializer):
 		#fields = '__all__'
 		exclude = ('assignments',)
 
+class CalendarSerializer(serializers.ModelSerializer):
+	title = serializers.CharField(source='name')
+	start = serializers.DateField(source='dateStart')
+	end = serializers.DateField(source='dateEnd')
+	class Meta:
+		model = Order
+		fields = ('title', 'start', 'end')
+
 class ClientSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Client

@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 router = routers.DefaultRouter()
+router.register(r'reservations', views.ReservationViewSet, base_name="reservations")
 router.register(r'user', views.UserViewSet)
 router.register(r'group', views.GroupViewSet)
 router.register(r'order', views.OrderViewSet)
@@ -14,9 +15,11 @@ router.register(r'client', views.ClientViewSet)
 router.register(r'shelf', views.ShelfViewSet)
 
 
+
 urlpatterns = router.urls
 urlpatterns.append(url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')))
 urlpatterns.append(url(r'^current-user/$', views.current_user))
+urlpatterns.append(url(r'^calfeed/$', views.cal))
 
 #Media files
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
