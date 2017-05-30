@@ -1,6 +1,0 @@
-Django==1.10.5
-django-cors-headers==2.0.0
-djangorestframework==3.5.3
-Pillow==4.0.0
-Radicale==1.1.1
-djradicale==0.0.13

@@ -43,9 +43,14 @@ class CalendarSerializer(serializers.ModelSerializer):
 	title = serializers.CharField(source='name')
 	start = serializers.DateField(source='dateStart')
 	end = serializers.DateField(source='dateEnd')
+	url = serializers.SerializerMethodField()
 	class Meta:
 		model = Order
-		fields = ('title', 'start', 'end')
+		fields = ('title', 'start', 'end', 'url')
+	def get_url(self, obj):
+		order = obj.id
+		host = 'localhost:8080/#/details/'
+		return host + str(order) + '/'
 
 class ClientSerializer(serializers.ModelSerializer):
 	class Meta:
