@@ -52,7 +52,7 @@ def current_user(request):
 def cal(request):
     start = request.GET.get('start')
     end = request.GET.get('end')
-    queryset = Order.objects.filter(dateStart__range=[start, end])
+    queryset = Order.objects.filter(~Q(status='F'),dateStart__range=[start, end])
     serializer = CalendarSerializer(queryset, many=True)
     return Response(serializer.data)
 class ClientViewSet(viewsets.ModelViewSet):

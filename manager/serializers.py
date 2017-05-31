@@ -50,7 +50,7 @@ class CalendarSerializer(serializers.ModelSerializer):
 	def get_url(self, obj):
 		order = obj.id
 		host = 'localhost:8080/#/details/'
-		return host + str(order) + '/'
+		return '#' + '/' + 'details' + '/' + str(order) + '/'
 
 class ClientSerializer(serializers.ModelSerializer):
 	class Meta:
