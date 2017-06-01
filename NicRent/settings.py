@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
+from .passwords import email
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djradicale',
+    'users'
 
 ]
 
@@ -180,5 +181,12 @@ MEDIA_ROOT = '/Users/nicholaslamprecht/GitHub/EasyRent/manager/Media'
 MEDIA_URL = '/api/media/'
 APPEND_SLASH = False
 
-#internal
-
+#Email settings
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'admin@nictec.at'
+SERVER_EMAIL = 'office@nictec.at'
+EMAIL_HOST = 'mail.nictec.at'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'office@nictec.at'
+EMAIL_HOST_PASSWORD = email()
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

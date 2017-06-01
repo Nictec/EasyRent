@@ -1,0 +1,8 @@
+Sehr geehrter Benutzer
+Sie Bekommen diese Email, da Sie auf der Website {{ site_name }} das Zurücksetzen Ihres Passworts angefordert haben.
+Um das neue Passwort zu setzen klicken Sie bitte uf den unten liegenden Link.
+
+http://{{ domain }}{% url 'reset_password_confirm' uidb64=uid token=token %}
+
+Mit freundlichen Grüßen:
+Das Admin Team

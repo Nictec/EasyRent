@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<!-- code for displaying success or error message in template -->
+ {% if messages %}
+
+     {% for message in messages %}
+     <div class="{{ message.tags }}">
+     <h3>{{ message }}</h3>
+   </div>
+     {% endfor %}
+{% endif %}
+
+
+ <!-- Form rendering code for template -->
+ <div class="app">
+
+   <h1>Passwort zurücksetzen:</h1>
+   <form action="" method="post">
+
+     {% csrf_token %}
+     {{ form.as_p }}
+
+     <input type="submit" value="Absenden" />
+   </form>
+  </div>
+{% endblock %}
