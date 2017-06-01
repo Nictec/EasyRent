@@ -57,11 +57,6 @@ ul.topnav li.icon {display: none;}
        font-weight: bold;
    }
 
-   .app{
-     margin-left: 50em;
-     margin-top: 10em;
-     font-family: roboto;
-   }
 
    .success{
   background-color: #406f00;
@@ -90,6 +85,7 @@ ul.topnav li.icon {display: none;}
     padding-bottom: 10px;
     font-family: roboto;
     font-size: 16pt;
+    overflow-wrap: normal;
 }
 
 .error{
@@ -119,4 +115,5 @@ cursor: pointer;
  padding-bottom: 10px;
  font-family: roboto;
  font-size: 16pt;
+ overflow-wrap: normal;
 }
